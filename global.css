@@ -1,0 +1,23 @@
+/* Sections */
+.container {
+  margin: 2rem auto;
+  max-width: 75rem;
+  padding: 1rem;
+  position: center;
+}
+
+/* Section Header Content */
+.header-container {
+  background-color: #e8d6eb;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+/* API title header */
+.option-container {
+  text-align: center;
+  background-color: #e2df80;
+  padding: 1rem 1rem;
+  border: 5px solid;
+  border-color: #332924;
+}
