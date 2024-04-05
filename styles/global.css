@@ -1,3 +1,6 @@
+body {
+  background:#e8d6eb;
+}
 /* Sections */
 .container {
   margin: 2rem auto;
@@ -10,7 +13,7 @@
 .header-container {
   background-color: #e8d6eb;
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
 }
 
 /* Subheader */
@@ -20,4 +23,5 @@
   padding: 2rem 2rem;
   border: 5px solid;
   border-color: #332924;
+  margin: 2rem;
 }
