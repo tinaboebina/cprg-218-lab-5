@@ -1,5 +1,6 @@
 // Get the container element where the cards will be displayed
 const container = document.getElementById('option-2-results');
+const enhancedContainer = document.getElementById('option-2-enhanced-results');
 
 // Function to fetch data from the API
 async function fetchData() {
@@ -51,16 +52,56 @@ async function renderMovies() {
       // Append the card content to the card
       card.appendChild(divCardContent);
 
-      // Append the card to the container
-      container.appendChild(card);
+      // Append the card to the appropriate container
+      container.appendChild(card.cloneNode(true));
+      enhancedContainer.appendChild(card);
     });
   } catch (error) {
     // If an error occurs during fetching or rendering, display an error message
     const errorMessage = document.createElement('marquee');
-    errorMessage.textContent = `Sorry, it's not working :()`;
+    errorMessage.textContent = `Sorry, it's not working :(`;
     container.appendChild(errorMessage);
   }
 }
 
 // Call the function to render movies onto the page
 renderMovies();
+
+/**
+ * Option 2 Enhanced: Search bar function.
+ */
+function searchbarEventHandler() {
+  // Get the value of the input field with id="searchbar"
+  let input = document.getElementById("searchbar").value.toLowerCase();
+  // Get all the cards
+  const card = enhancedContainer.getElementsByClassName("card");
+
+  // Hide the filtered movies section initially
+  const filteredMoviesSection = document.querySelector('.option-2-enhanced');
+  filteredMoviesSection.style.display = 'none';
+
+  // Flag to track if any card matches the search
+  let matchFound = false;
+
+  for (let i = 0; i < card.length; i++) {
+    // Get the movie title from the card
+    const title = card[i].querySelector('.header').textContent.toLowerCase();
+    // Check if the title contains the search input
+    if (title.includes(input)) {
+      card[i].style.display = "block";
+      matchFound = true;
+    } else {
+      card[i].style.display = "none";
+    }
+  }
+
+  // Display or hide the filtered movies section based on if there are matches
+  if (matchFound) {
+    filteredMoviesSection.style.display = 'block';
+  } else {
+    filteredMoviesSection.style.display = 'none';
+  }
+}
+
+const searchbar = document.getElementById("searchbar");
+searchbar.addEventListener("keyup", searchbarEventHandler);

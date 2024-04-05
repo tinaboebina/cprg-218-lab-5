@@ -16,7 +16,9 @@
   <!-- Heading for the Page -->
   <header class="header-container">
     <h1>CPRG 218 - Lab 5</h1>
-  <!-- Option 2: Dispay Cards -->
+  </header>
+
+  <!-- Option 2: Display Cards -->
   <section class="cards">
     <div class="option-container">
       <h2>Studio Ghibli Movies API</h2>
@@ -24,7 +26,24 @@
     <div class="container">
       <ul id="option-2-results" class="card-container"></ul>
     </div>
+  </section> 
+
+
+  <!-- Option 2 Enhanced: Section for filtered cards -->
+  <section class="option-2-enhanced">
+    <div class="option-container">
+      <h2>Filtered Movies</h2>
+      <!-- Search box to find content on cards -->
+  <div class="search-container" style="text-align: center;">
+    <input id="searchbar" class="search" type="text" name="search" placeholder="Search..">
+  </div>
+      <!-- Display filtered cards -->
+      <div class="container">
+        <ul id="option-2-enhanced-results" class="card-container"></ul>
+      </div>
+    </div>
   </section>
+
   <script src="scripts.js" defer></script>
 </body>
 
