@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,42 +8,28 @@
   <link rel="stylesheet" type="text/css" href="fonts.css">
   <link rel="stylesheet" type="text/css" href="global.css">
   <link rel="stylesheet" type="text/css" href="styles.css">
-  <title>API</title>
+  <title>Studio Ghibli API</title>
 </head>
 
 <body>
-  <!-- Heading for the Page -->
   <header class="header-container">
     <h1>CPRG 218 - Lab 5</h1>
   </header>
 
-  <!-- Option 2: Display Cards -->
   <section class="cards">
-    <div class="option-container">
-      <h2>Studio Ghibli Movies API</h2>
-    </div>
-    <div class="container">
-      <ul id="option-2-results" class="card-container"></ul>
-    </div>
-  </section> 
-
-
-  <!-- Option 2 Enhanced: Section for filtered cards -->
-  <section class="option-2-enhanced">
-    <div class="option-container">
-      <h2>Filtered Movies</h2>
-      <!-- Search box to find content on cards -->
-  <div class="search-container" style="text-align: center;">
-    <input id="searchbar" class="search" type="text" name="search" placeholder="Search..">
-  </div>
-      <!-- Display filtered cards -->
-      <div class="container">
-        <ul id="option-2-enhanced-results" class="card-container"></ul>
-      </div>
+    <div class="subhead-container">
+      <h2>Search Studio Ghibli Movie Titles</h2>
+        <div class="search-container" style="text-align: center;">
+          <input id="searchbar" class="search" type="text" name="search" placeholder="Search..">
+        </div>
+      
+        <div class="container">
+          <ul id="film-cards" class="card-container"></ul>
+        </div>
     </div>
   </section>
 
   <script src="scripts.js" defer></script>
-</body>
 
+</body>
 </html>

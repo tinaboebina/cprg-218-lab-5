@@ -1,15 +1,12 @@
-// Get the container element where the cards will be displayed
-const container = document.getElementById('option-2-results');
-const enhancedContainer = document.getElementById('option-2-enhanced-results');
+const filmContainer = document.getElementById('film-cards');
 
-// Function to fetch data from the API
+// Get movie data from API //
 async function fetchData() {
   try {
     const response = await fetch('https://ghibli.rest/films');
     if (!response.ok) {
       throw new Error('Network response was not ok.');
     }
-
     const data = await response.json();
     return data;
   } catch (error) {
@@ -18,90 +15,51 @@ async function fetchData() {
   }
 }
 
-// Function to render movies onto the page
+// Create movie card in this format //
 async function renderMovies() {
   try {
-    // Fetch movie data from the API
     const movies = await fetchData();
-    // Iterate over each movie in the data
     movies.forEach(movie => {
-      // Create a card to represent each movie
-      const card = document.createElement('li');
-      card.setAttribute('class', 'card');
-
-      // Create a div to hold the card content
-      const divCardContent = document.createElement('div');
-      divCardContent.setAttribute('class', 'card-content');
-
-      // Create a heading element for the movie title
-      const h3 = document.createElement('h3');
-      h3.setAttribute('class', 'header');
-      h3.textContent = movie.title;
-
-      // Create a paragraph element for the movie description
-      const p = document.createElement('p');
-      p.setAttribute('class', 'description');
-      // Shorten the description
-      movie.description = movie.description.substring(0, 300);
-      p.textContent = `${movie.description}...`;
-
-      // Append title and description to the card content div
-      divCardContent.appendChild(h3);
-      divCardContent.appendChild(p);
-
-      // Append the card content to the card
-      card.appendChild(divCardContent);
-
-      // Append the card to the appropriate container
-      container.appendChild(card.cloneNode(true));
-      enhancedContainer.appendChild(card);
+      const card = `
+        <li class="card" data-title="${movie.title.toLowerCase()}">
+          <div class="card-content">
+            <h3 class="header">${movie.title}</h3><br>
+            <h5 class="subheader">
+              Running Time: ${movie.running_time} minutes <br>
+              Rotten Tomatoes Score: ${movie.rt_score}
+            </h5>
+            <p class="card-text">${movie.description}</p>
+          </div>
+        </li>
+      `;
+      filmContainer.insertAdjacentHTML('beforeend', card);
     });
   } catch (error) {
-    // If an error occurs during fetching or rendering, display an error message
-    const errorMessage = document.createElement('marquee');
-    errorMessage.textContent = `Sorry, it's not working :(`;
-    container.appendChild(errorMessage);
+    const errorMessage = `<marquee>Sorry, it's not working :(</marquee>`;
+    filmContainer.insertAdjacentHTML('beforeend', errorMessage);
   }
 }
 
-// Call the function to render movies onto the page
-renderMovies();
-
-/**
- * Option 2 Enhanced: Search bar function.
- */
-function searchbarEventHandler() {
-  // Get the value of the input field with id="searchbar"
-  let input = document.getElementById("searchbar").value.toLowerCase();
-  // Get all the cards
-  const card = enhancedContainer.getElementsByClassName("card");
-
-  // Hide the filtered movies section initially
-  const filteredMoviesSection = document.querySelector('.option-2-enhanced');
-  filteredMoviesSection.style.display = 'none';
-
-  // Flag to track if any card matches the search
-  let matchFound = false;
-
-  for (let i = 0; i < card.length; i++) {
-    // Get the movie title from the card
-    const title = card[i].querySelector('.header').textContent.toLowerCase();
-    // Check if the title contains the search input
+// OPTION 2 ENHANCED - Search Bar //
+function searchMovies(input) {
+  const cards = filmContainer.querySelectorAll('.card');
+  cards.forEach(card => {
+    const title = card.dataset.title;
     if (title.includes(input)) {
-      card[i].style.display = "block";
-      matchFound = true;
+      card.style.display = "block";
     } else {
-      card[i].style.display = "none";
+      card.style.display = "none";
     }
-  }
-
-  // Display or hide the filtered movies section based on if there are matches
-  if (matchFound) {
-    filteredMoviesSection.style.display = 'block';
-  } else {
-    filteredMoviesSection.style.display = 'none';
-  }
+  });
 }
 
+function searchbarEventHandler() {
+  let input = document.getElementById("searchbar").value.toLowerCase();
+  searchMovies(input);
+}
+
+// Card will populate during user input //
 const searchbar = document.getElementById("searchbar");
 searchbar.addEventListener("keyup", searchbarEventHandler);
+
+renderMovies();

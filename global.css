@@ -13,11 +13,11 @@
   padding: 4rem 2rem;
 }
 
-/* API title header */
-.option-container {
+/* Subheader */
+.subhead-container {
   text-align: center;
   background-color: #e2df80;
-  padding: 1rem 1rem;
+  padding: 2rem 2rem;
   border: 5px solid;
   border-color: #332924;
 }
